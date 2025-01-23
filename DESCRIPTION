@@ -1,0 +1,11 @@
+Package: NOmisc
+Type: Package
+Title: Miscelaneous functions that aid in doing statistics, visualization, data management and data analysis
+Version: 1.0.0
+Author: Nathaniel S. O'Connell, PhD
+Maintainer: Nathaniel S. O'Connell, PhD <n.oconnell@wakehealth.edu>
+Description: Miscelaneous functions that aid in doing statistics, visualization, data management and data analysis
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.2
