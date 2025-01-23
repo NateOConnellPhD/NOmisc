@@ -29,11 +29,11 @@ convert_low_levels <- function(x, thresh, new_level_name = "Other") {
   levels_to_convert <- names(level_counts[level_counts < thresh])
 
   # Update the factor levels
-  levels(x) <- c(
-    setdiff(levels(x), levels_to_convert),
-    new_level_name
-  )
+  x <- factor(x, levels = c(levels(x), new_level_name))
   x[x %in% levels_to_convert] <- new_level_name
+
+  # Drop unused levels
+  x <- droplevels(x)
 
   return(x)
 }
