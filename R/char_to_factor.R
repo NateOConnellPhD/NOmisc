@@ -23,3 +23,6 @@ char_to_factor <- function(df) {
 
   return(df)
 }
+
+
+
