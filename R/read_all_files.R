@@ -1,13 +1,14 @@
-#' Read Multiple Files from a Folder Quickly
+#' Read Multiple Files from a Folder Quickly (as Data Frames)
 #'
-#' Efficiently reads all files from a specified folder that match a given file extension
-#' and optionally contain a specific substring in the filename.
+#' Efficiently reads all files from a specified folder that match a given file extension,
+#' and optionally contain a specific substring in the filename. Uses `fread` from the
+#' `data.table` package for speed, then converts each result to a standard `data.frame`.
 #'
 #' @param folder Character. Path to the folder containing the files.
 #' @param extension Character. File extension to match (e.g., `"csv"`, `"txt"`). Default is `".csv"`.
 #' @param contains Optional character string. If provided, only files whose names contain this string will be read.
 #'
-#' @return A named list of data frames (data.tables). Each element corresponds to a file, with names based on filenames (excluding extensions).
+#' @return A named list of data frames. Each element corresponds to a file, with names based on filenames (excluding extensions).
 #' @examples
 #' \dontrun{
 #' # Read all CSV files in the "data" folder that contain "survey" in their names
@@ -32,11 +33,12 @@ read_all_files <- function(folder, extension = ".csv", contains = NULL) {
     files <- files[grepl(contains, basename(files))]
   }
 
-  # Use fread to read files efficiently
-  data_list <- lapply(files, data.table::fread)
+  # Read files using fread and convert to data.frame
+  data_list <- lapply(files, function(f) as.data.frame(data.table::fread(f)))
 
-  # Name the list entries by filename without extension
+  # Name the list elements by the file names without extensions
   names(data_list) <- tools::file_path_sans_ext(basename(files))
 
   return(data_list)
 }
+
