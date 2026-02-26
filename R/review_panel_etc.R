@@ -51,7 +51,7 @@ utils::globalVariables(c("start", "end"))
 #'
 #' @examples
 #' \dontrun{
-#' finish_time_panel(
+#' panel_finish_time(
 #'   begin_hhmm = "09:36",
 #'   review_total = 40,
 #'   reviews_completed = 3,
@@ -63,7 +63,7 @@ utils::globalVariables(c("start", "end"))
 #' }
 #'
 #' @export
-finish_time_panel <- function(begin_hhmm,
+panel_finish_time <- function(begin_hhmm,
                               review_total,
                               reviews_completed,
                               break_hhmm = NULL,
@@ -177,7 +177,8 @@ finish_time_panel <- function(begin_hhmm,
     cat("Stabilized avg:     ", sprintf("%.2f", avg_rev_time_est), " min/review\n", sep = "")
     cat("Work minutes:       ", sprintf("%.2f", work_minutes), "\n", sep = "")
     cat("Breaks added:       ", sprintf("%.0f", breaks_added), " min\n", sep = "")
-    cat("Time to completion: ", sprintf("%.2f", total_minutes_left), " min\n", sep = "")
+    cat("Estimated completion:", format(t_end, "%Y-%m-%d %H:%M:%S %Z"), "\n", sep = "")
+    cat("Time to completion:  ", sprintf("%.2f", total_minutes_left), " min\n", sep = "")
     cat("============================================================\n")
   }
 
@@ -218,6 +219,7 @@ finish_time_panel <- function(begin_hhmm,
       "   |   Stabilized: ", sprintf("%.2f", avg_rev_time_est),
       "   |   Planned: ", sprintf("%.2f", planned_mean),
       "\nBreaks added: ", sprintf("%.0f", breaks_added), " min",
+      "\nFinish at: ", format(t_end, "%H:%M"),
       "   |   Time to completion: ", sprintf("%.1f", total_minutes_left), " min"
     )
 
@@ -243,7 +245,7 @@ finish_time_panel <- function(begin_hhmm,
       ggplot2::geom_point(ggplot2::aes(x = T, y = 0), size = 3) +
       ggplot2::geom_point(ggplot2::aes(x = t_end, y = 0), size = 3) +
       ggplot2::annotate("text", x = begin_time, y = 0.06, label = "Begin",  vjust = 0) +
-      ggplot2::annotate("text", x = T,          y = 0.06, label = "Now",    vjust = 0) +
+      ggplot2::annotate("text", x = T,          y = 0.06, label = "Now",    vjust = 0, hjust=.2) +
       ggplot2::annotate("text", x = t_end,      y = 0.06, label = "Finish", vjust = 0) +
       ggplot2::annotate(
         "label",

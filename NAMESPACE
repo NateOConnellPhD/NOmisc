@@ -2,8 +2,8 @@
 
 export(char_to_factor)
 export(convert_low_levels)
-export(finish_time_panel)
 export(is_binary)
+export(panel_finish_time)
 export(read_all_files)
 export(read_excel_allsheets)
 export(remove_na_cols)
