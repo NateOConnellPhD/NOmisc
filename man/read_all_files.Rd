@@ -2,14 +2,14 @@
 % Please edit documentation in R/read_all_files.R
 \name{read_all_files}
 \alias{read_all_files}
-\title{Read Multiple Files from a Folder}
+\title{Read Multiple Files from a Folder Quickly (as Data Frames)}
 \usage{
 read_all_files(folder, extension = ".csv", contains = NULL)
 }
 \arguments{
 \item{folder}{Character. Path to the folder containing the files.}
 
-\item{extension}{Character. File extension to match (e.g., `"csv"`, `"txt"`). Default is `".csv"`.}
+\item{extension}{Character. File extension to match (e.g., \code{"csv"}, \code{"txt"}). Default is \code{".csv"}.}
 
 \item{contains}{Optional character string. If provided, only files whose names contain this string will be read.}
 }
@@ -17,14 +17,13 @@ read_all_files(folder, extension = ".csv", contains = NULL)
 A named list of data frames. Each element corresponds to a file, with names based on filenames (excluding extensions).
 }
 \description{
-Reads all files from a specified folder that match a given file extension and (optionally) contain a specific substring in the filename.
+Efficiently reads all files from a specified folder that match a given file extension,
+and optionally contain a specific substring in the filename. Uses \code{fread} from the
+\code{data.table} package for speed, then converts each result to a standard \code{data.frame}.
 }
 \examples{
 \dontrun{
 # Read all CSV files in the "data" folder that contain "survey" in their names
 survey_data <- read_files_from_folder("data", extension = "csv", contains = "survey")
-
-# Read all TXT files regardless of name
-txt_data <- read_files_from_folder("logs", extension = "txt")
 }
 }
