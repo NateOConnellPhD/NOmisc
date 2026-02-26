@@ -245,7 +245,7 @@ panel_finish_time <- function(begin_hhmm,
       ggplot2::geom_point(ggplot2::aes(x = T, y = 0), size = 3) +
       ggplot2::geom_point(ggplot2::aes(x = t_end, y = 0), size = 3) +
       ggplot2::annotate("text", x = begin_time, y = 0.06, label = "Begin",  vjust = 0) +
-      ggplot2::annotate("text", x = T,          y = 0.06, label = "Now",    vjust = 0, hjust=.75) +
+      ggplot2::annotate("text", x = T,          y = 0.06, label = "Now",    vjust = 0, hjust=-.15) +
       ggplot2::annotate("text", x = t_end,      y = 0.06, label = "Finish", vjust = 0) +
       ggplot2::annotate(
         "label",
